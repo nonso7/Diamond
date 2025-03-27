@@ -3,6 +3,11 @@ pragma solidity ^0.8.0;
 
 import {LibAppStorage} from "../libraries/LibAppStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
+interface IDiamondERC20 {
+    function mint(address to, uint256 amount) external;
+}
 
 contract ERC721Facet {
     LibAppStorage.AppStorage s;
@@ -34,7 +39,7 @@ contract ERC721Facet {
         
         
         nft.transferFrom(address(this), msg.sender, _tokenId);
-        IERC20(s.rewardToken).transfer(msg.sender, reward);
+        IDiamondERC20(s.erc20RewardToken).transfer(msg.sender, rewardYield);
         
         emit NFTUnstaked(msg.sender, _tokenId);
     }

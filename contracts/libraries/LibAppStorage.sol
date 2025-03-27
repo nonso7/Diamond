@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 
 library LibAppStorage{
     struct AppStorage {
-        address rewardToken;
+        address erc20RewardToken;
         address erc20Token;
         address erc721Token;
         address erc1155Token;
